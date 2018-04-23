@@ -10,3 +10,6 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=40)
     descripcion = models.CharField(max_length=150)
     precio_unitario = models.FloatField(validators=[MinValueValidator(0.0)])
+
+    def __unicode__(self):
+        return '{}'.format(self.nombre)

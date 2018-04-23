@@ -12,4 +12,7 @@ class Cliente(models.Model):
     apellidos = models.CharField(max_length=60)
     sexo = models.CharField(max_length=60, choices=SEX_CHOICES)
     telefono = models.CharField(max_length=60, validators=[validateNumber])
-    fecha_nacimiento = models.DateField()
+    fecha_nacimiento = models.DateField(null = True)
+
+    def __unicode__(self):
+        return '{} {}'.format(self.nombre, self.apellidos)
