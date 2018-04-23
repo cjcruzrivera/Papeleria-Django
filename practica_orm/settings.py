@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_orm'
+    'app_orm',
+    'app_productos',
+    'app_clientes',
+    'app_ventas',
 ]
 
 MIDDLEWARE = [
@@ -77,10 +80,10 @@ WSGI_APPLICATION = 'practica_orm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '1535038',
-        'USER': '1535038',
-        'PASSWORD': '1535038',
-        'HOST': 'pgsql2',
+        'NAME': 'practica_orm',
+        'USER': 'camilojcr',
+        'PASSWORD': 'camilojcr',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 
