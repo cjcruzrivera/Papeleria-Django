@@ -40,5 +40,8 @@
         "haskell": "runhaskell",
         "nim": "nim compile --verbosity:0 --hints:off --run"
     },
-    "python.linting.pylintArgs": ["--load-plugins=pylint_django"]
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django"
+    ],
+    "python.linting.enabled": false
 }

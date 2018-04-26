@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% load staticfiles %}
+
+{% block content %}
+<div id='content'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <i class='icon-beer icon-large'></i>
+               Listado de Clientes
+                <div class='panel-tools'>
+                </div>
+            </div>
+            <div class='panel-body' id="panel-body">
+                    {% if object_list %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td style="color: black">Identificación</td>
+                                <td style="color: black">Nombre</td>
+                                <td style="color: black">Apellidos</td>
+                                <td style="color: black">Sexo</td>
+                                <td style="color: black">Telefono</td>
+                                <td style="color: black">Fecha de Nacimiento</td>
+                                <td style="color: black">Acciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in object_list %}
+                            
+                            <tr>
+                                <td >{{ cliente.identificacion }}</td>
+                                <td>{{ cliente.nombre }}</td>
+                                <td>{{ cliente.apellidos }}</td>
+                                <td>{{ cliente.sexo }}</td>
+                                <td>{{ cliente.telefono }}</td>
+                                <td>{{ cliente.fecha_nacimiento }}</td>
+                                <td class="text-center" style="padding: 10px 10px 10px 10px">
+                                    <a class="btn btn-primary btn-sm" href="#">Editar</a> 
+                                    <a class="btn btn-danger btn-sm" href="#">Eliminar</a>
+                                </td>
+                            </tr>
+                            
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <h4>NO HAY CLIENTES REGISTRADOS</h4>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
