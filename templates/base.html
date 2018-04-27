@@ -90,7 +90,7 @@
 
                     <div class='row text-center'>
                         <div class='col-md-4'>
-                            <a href="/clientes">
+                            <a href="{% url 'clientes:index' %}">
                                 <img style="width: 180px" class="img-fluid mb-3 d-block mx-auto" src="{% static 'images/cliente.png' %}" alt="">
                                 <div class="well">
                                     <h4>GESTIÓN DE CLIENTES</h4>
@@ -98,7 +98,7 @@
                             </a>
                         </div>
                         <div class='col-md-4'>
-                                <a href="/clientes">
+                                <a href="{% url 'productos:index' %}">
                                     <img style="width: 180px" class="img-fluid mb-3 d-block mx-auto" src="{% static 'images/productos.png' %}" alt="">
                                     <div class="well">
                                         <h4>GESTIÓN DE PRODUCTOS</h4>
