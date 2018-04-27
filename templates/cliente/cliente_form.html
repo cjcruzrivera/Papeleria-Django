@@ -1,29 +1,32 @@
-{% extends 'base.html' %} 
-{% load staticfiles %}
-
-{% block content %}
+{% extends 'base.html' %} {% load staticfiles %} {% block content %} {% block navigation %}
+<li>
+    <a href="{% url 'clientes:index' %}">Clientes</a>
+</li>
+<li>
+    <a href="{% url 'clientes:nuevo' %}">Nuevo</a>
+</li>
+{% endblock %}
 <div id='content'>
-        <div class='panel panel-default'>
-            <div class='panel-heading'>
-                <i class='icon-beer icon-large'></i>
-               Nuevo Cliente
-                <div class='panel-tools'>
-                </div>
-            </div>
-            <div class='panel-body' id="panel-body">
-    
-                    <form method="POST">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="text-center form-group">
-                                <button id="agregar" type="submit" class="btn btn-default">Guardar</button>
-                                <button id="limpiar" type="reset" class="btn btn-default">Limpiar</button>
-                                <button type = "dismiss" class="btn btn-default">
-                                    <a id="cancelar" href="{% url 'clientes:nuevo' %}" >Cancelar</a>                
-                                </button>
-                            </div>
-                        </form>
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <i class='icon-beer icon-large'></i>
+            Nuevo Cliente
+            <div class='panel-tools'>
             </div>
         </div>
+        <div class='panel-body' id="panel-body">
+
+            <form method="POST">
+                {% csrf_token %} {{ form.as_p }}
+                <div class="text-center form-group">
+                    <button id="agregar" type="submit" class="btn btn-default">Guardar</button>
+                    <button id="limpiar" type="reset" class="btn btn-default">Limpiar</button>
+                    <button type="dismiss" class="btn btn-default">
+                        <a id="cancelar" href="{% url 'clientes:nuevo' %}">Cancelar</a>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}

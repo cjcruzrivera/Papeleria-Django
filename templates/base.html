@@ -36,10 +36,10 @@
                     <a href='#'>Clientes</a>
                     <ul class='dropdown-menu'>
                         <li>
-                            <a href='#'>Registrar Cliente</a>
+                            <a href="{% url 'clientes:nuevo' %}">Registrar Cliente</a>
                         </li>
                         <li>
-                            <a href='#'>Consultar Clientes</a>
+                            <a href="{% url 'clientes:listar' %}">Consultar Clientes</a>
                         </li>
                     </ul>
                 </li>
@@ -65,14 +65,11 @@
         <!-- Tools -->
         <section id='tools'>
             <ul class='breadcrumb' id='breadcrumb'>
-                <li class='title'>Inicio</li>
-                {% block navigation %}
+                <li class='title'><a href="{% url 'index' %}">Inicio</a></li>
+                {% block navigation %}                
                 <!-- <li>
                     <a href="#">Lorem</a>
-                </li>
-                <li class='active'>
-                    <a href="#">ipsum</a>
-                </li> -->
+                </li>-->
                 {% endblock %}
             </ul>
 
