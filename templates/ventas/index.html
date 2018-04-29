@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% load staticfiles %}
+{% block activeIni %}
+dropdown hover
+{% endblock %}
+{% block activeCli %}
+dropdown hover
+{% endblock %}
+{% block activePro %}
+active
+{% endblock %}
+{% block activeVen %}
+dropdown hover
+{% endblock %}
+{% block navigation %}
+<li>
+    <a href="{% url 'productos:index' %}">Productos</a>
+</li>
+<li title="Registrar nuevo producto">
+    <a ref="{% url 'productos:nuevo' %}">Nuevo</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

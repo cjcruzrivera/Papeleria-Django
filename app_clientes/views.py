@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.http import JsonResponse
-from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, UpdateView, CreateView
 
 # Create your views here.
 from .forms import ClienteForm

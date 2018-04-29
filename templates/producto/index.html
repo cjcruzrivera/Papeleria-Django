@@ -1,6 +1,25 @@
 {% extends 'base.html' %} 
 {% load staticfiles %}
-
+{% block activeIni %}
+dropdown hover
+{% endblock %}
+{% block activeCli %}
+dropdown hover
+{% endblock %}
+{% block activePro %}
+active
+{% endblock %}
+{% block activeVen %}
+dropdown hover
+{% endblock %}
+{% block navigation %}
+<li>
+    <a href="{% url 'productos:index' %}">Productos</a>
+</li>
+<li title="Registrar nuevo producto">
+    <a ref="{% url 'productos:nuevo' %}">Nuevo</a>
+</li>
+{% endblock %}
 {% block content %}
 
 <div id='content'>
@@ -13,7 +32,7 @@
 
             <div class='row text-center'>
                     <div class='col-md-4'>
-                            <a href="{% url 'clientes:nuevo' %}">
+                            <a href="{% url 'productos:nuevo' %}">
                                 <img style="width: 180px" class="img-fluid mb-3 d-block mx-auto" src="{% static 'images/new_product.jpeg' %}" alt="">
                                 <div class="well">
                                     <h4>REGISTRAR PRODUCTOS</h4>
@@ -21,7 +40,7 @@
                             </a>
                     </div>
                 <div class='col-md-4'>
-                    <a href="/clientes">
+                    <a href="{% url 'productos:listar' %}">
                         <img style="width: 180px" class="img-fluid mb-3 d-block mx-auto" src="{% static 'images/list_product.jpg' %}" alt="">
                         <div class="well">
                             <h4>CONSULTAR PRODUCTOS</h4>

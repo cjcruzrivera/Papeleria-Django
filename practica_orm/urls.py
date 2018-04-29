@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^clientes/', include('app_clientes.urls', namespace="clientes")),    
     url(r'^productos/',include('app_productos.urls', namespace="productos")),
+    url(r'^ventas/',include('app_ventas.urls', namespace="ventas")),
 ]

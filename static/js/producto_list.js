@@ -1,22 +1,22 @@
 $(document).on('click', '#delete', function () {
-    var cliente = "";
-    cliente = $(this).attr('data-nombre');
-    id_cliente = $(this).attr('data-id');
+    var producto = "";
+    producto = $(this).attr('data-nombre');
+    id_producto = $(this).attr('data-id');
     swal({
         title: "Advertencia",
-        text: "¿Seguro que desea eliminar al cliente " + cliente + "?",
+        text: "¿Seguro que desea eliminar el producto " + producto + "?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     })
         .then((willDelete) => {
             if (willDelete) {
-                borrado = deleteCliente(id_cliente);
+                borrado = deleteProducto(id_producto);
                 console.log(borrado); 
                 if (borrado) {
                     swal({
                         title: "Borrado con éxito",
-                        text: "El cliente " + cliente + " ha sido borrado con éxito",
+                        text: "El producto " + producto + " ha sido borrado con éxito",
                         icon: "success",
                         buttons: false,
                         timer: 1500,
@@ -28,14 +28,14 @@ $(document).on('click', '#delete', function () {
         });
 });
 
-function deleteCliente(id) {
+function deleteProducto(id) {
 
     $.ajax({
         type: "POST",
         data: {
-            id_cliente: id
+            id_producto: id
         },
-        url: "/clientes/eliminar/",
+        url: "/productos/eliminar/",
         success: function (msg) {
             borrado = "SI";
         },

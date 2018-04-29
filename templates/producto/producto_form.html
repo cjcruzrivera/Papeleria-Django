@@ -1,31 +1,29 @@
 {% extends 'base.html' %} {% load staticfiles %} {% block content %} 
-
 {% block activeIni %}
 dropdown hover
 {% endblock %}
 {% block activeCli %}
-active
+dropdown hover
 {% endblock %}
 {% block activePro %}
-dropdown hover
+active
 {% endblock %}
 {% block activeVen %}
 dropdown hover
 {% endblock %}
-
 {% block navigation %}
 <li>
-    <a href="{% url 'clientes:index' %}">Clientes</a>
+    <a href="{% url 'productos:index' %}">Productos</a>
 </li>
-<li title="Registrar nuevo cliente">
-    <a ref="{% url 'clientes:nuevo' %}">Nuevo</a>
+<li title="Registrar nuevo producto">
+    <a ref="{% url 'productos:nuevo' %}">Nuevo</a>
 </li>
 {% endblock %}
 <div id='content'>
     <div class='panel panel-default'>
         <div class='panel-heading'>
             <i class='icon-beer icon-large'></i>
-            Nuevo Cliente
+            Nuevo Producto
             <div class='panel-tools'>
             </div>
         </div>
@@ -36,8 +34,7 @@ dropdown hover
                 <div class="text-center form-group">
                     <button id="agregar" type="submit" class="btn btn-success">Guardar</button>
 
-                    <a class="btn btn-danger" id="cancelar" href="{% url 'clientes:listar' %}">Cancelar</a>
-
+                    <a class="btn btn-danger" id="cancelar" href="{% url 'productos:listar' %}">Cancelar</a>
                 </div>
             </form>
         </div>

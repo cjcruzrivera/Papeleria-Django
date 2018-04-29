@@ -29,13 +29,13 @@
         <section id='sidebar'>
             <i class='icon-align-justify icon-large' id='toggle'></i>
             <ul id='dock'>
-                <li class=' {% block activeIni %}active{% endblock %} launcher'>
+                <li class='launcher {% block activeIni %}active{% endblock %}'>
                     <i class='icon-dashboard'></i>
                     <a href="{% url 'index' %}">INICIO</a>
                 </li>
-                <li class='launcher dropdown hover'>
+                <li class='launcher {% block activeCli %}dropdown hover{% endblock %}'>
                     <i class='icon-user'></i>
-                    <a href='#'>Clientes</a>
+                    <a href="{% url 'clientes:index' %}">Clientes</a>
                     <ul class='dropdown-menu'>
                         <li>
                             <a href="{% url 'clientes:nuevo' %}">Registrar Cliente</a>
@@ -45,19 +45,19 @@
                         </li>
                     </ul>
                 </li>
-                <li class='launcher dropdown hover'>
+                <li class='launcher {% block activePro %}dropdown hover{% endblock %}'>
                         <i class='icon-briefcase'></i>
-                        <a href='#'>Productos</a>
+                        <a href="{% url 'productos:index' %}">Productos</a>
                         <ul class='dropdown-menu'>
                             <li>
-                                <a href='#'>Registrar Producto</a>
+                                <a href="{% url 'productos:nuevo' %}">Registrar Producto</a>
                             </li>
                             <li>
-                                <a href='#'>Consultar Productos</a>
+                                <a href="{% url 'productos:listar' %}">Consultar Productos</a>
                             </li>
                         </ul>
                 </li>
-                <li class='launcher'>
+                <li class='launcher {% block activeVen %}dropdown hover{% endblock %}'>
                     <i class='icon-money'></i>
                     <a href='#'>Ventas</a>
                 </li>
