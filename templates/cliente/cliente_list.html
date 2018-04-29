@@ -44,7 +44,7 @@
                                 <td>{{ cliente.fecha_nacimiento }}</td>
                                 <td class="text-center" style="padding: 10px 10px 10px 10px">
                                     <a class="btn btn-primary btn-sm" href="{% url 'clientes:editar' cliente.id %}">Editar</a> 
-                                    <a class="btn btn-danger btn-sm" href="#">Eliminar</a>
+                                    <a id="delete" data-id="{{ cliente.id }}" data-nombre="{{ cliente.nombre }} {{ cliente.apellidos }}" class="btn btn-danger btn-sm" href="#">Eliminar</a>
                                 </td>
                             </tr>
                             
@@ -58,3 +58,7 @@
         </div>
     </div>
 {% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'js/cliente_list.js' %}" type="text/javascript"></script>
+    {% endblock %}
