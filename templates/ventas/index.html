@@ -1,26 +1,73 @@
-{% extends 'base.html' %} 
-{% load staticfiles %}
-{% block activeIni %}
-dropdown hover
-{% endblock %}
-{% block activeCli %}
-dropdown hover
-{% endblock %}
-{% block activePro %}
-active
-{% endblock %}
-{% block activeVen %}
-dropdown hover
-{% endblock %}
+{% extends 'base.html' %} {% load staticfiles %} 
+{% block activeIni %} dropdown hover {% endblock %} 
+{% block activeCli %} dropdown hover {% endblock %} 
+{% block activePro %} dropdown hover {% endblock %} 
+{% block activeVen %} active {% endblock %} 
+
 {% block navigation %}
 <li>
-    <a href="{% url 'productos:index' %}">Productos</a>
+    <a href="{% url 'ventas:index' %}">Ventas</a>
 </li>
-<li title="Registrar nuevo producto">
-    <a ref="{% url 'productos:nuevo' %}">Nuevo</a>
-</li>
-{% endblock %}
+
+{% endblock %} 
 
 {% block content %}
+<div id='content'>
+    <div class='panel panel-default'>
+        <div class='panel-heading' style="font-size: 17px;height: 55px">
+            <i class='icon-beer icon-large'></i>
+            Gestión de Ventas
+            <div class='panel-tools'>
+                <button class="btn btn-warning">Nueva Venta</button>
+            </div>
+        </div>
+        <div class="panel-body" id="panel-body">
+                <div class="panel-heading">
+                    <a href="#usuarios" data-toggle="collapse" style="color:#2c3e50">Ventas por clientes</a>
+                </div class="panel-heading">
+                <div id="usuarios" class="panel-collapse collapse">
+                        <div class="panel-body" style="border: 0.5px solid #c6d0da;">
+                                {% if clientes %}
+                                <label class="control-label">Seleccione cliente a consultar</label>
 
+                                <div class="form-group row">
+                                  <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
+                                    <option>Seleccione Cliente</option>
+                                    {% for cliente in clientes %}
+                                    <option value="{{ cliente.id }}">{{cliente.identificacion}} -- {{cliente.nombre}} {{cliente.apellidos}}</option>
+                                    {% endfor %}
+                                  </select>
+                
+                                  <button class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS DEL CLIENTE</button>
+                                </div>
+                                {% else %}
+                                <label class="control-label">No hay clientes registrados</label>
+
+                                <div class="form-group row">
+                                  <a class="col-lg-3 col-md-3 btn btn-primary" href="{% url 'clientes:nuevo' %}" style="height: 35px; margin-left: 10px"> REGISTRAR NUEVO CLIENTE</a>
+                                </div>
+                                {% endif %}
+                        </div>
+                </div>
+        </div>
+        <div class="panel-body" id="panel-body">
+                <div class="panel-heading" ><a href="#productos" data-toggle="collapse" style="color:#2c3e50">Ventas por Productos</a></div class="panel-heading">
+                <div id="productos" class="panel-collapse collapse">
+                        <div class="panel-body" style="border: 0.5px solid #c6d0da;" >
+                                <label class="control-label">Seleccione producto a consultar</label>
+                
+                                <div class="form-group row">
+                                  <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
+                                    <option>Seleccione Producto</option>
+                                    
+
+                                  </select>
+                
+                                  <button class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS POR PRODUCTO</button>
+                                </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

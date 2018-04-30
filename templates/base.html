@@ -59,7 +59,7 @@
                 </li>
                 <li class='launcher {% block activeVen %}dropdown hover{% endblock %}'>
                     <i class='icon-money'></i>
-                    <a href='#'>Ventas</a>
+                    <a href="{% url 'ventas:index' %}">Ventas</a>
                 </li>
             </ul>
             <div data-toggle='tooltip' id='beaker' title='Made by lab2023'></div>
@@ -105,7 +105,7 @@
                                 </a>
                         </div>
                         <div class='col-md-4'>
-                                <a href="/clientes">
+                                <a href="{% url 'ventas:index' %}">
                                     <img style="width: 180px" class="img-fluid mb-3 d-block mx-auto" src="{% static 'images/ventas.png' %}" alt="">
                                     <div class="well">
                                         <h4>GESTIÓN DE VENTAS</h4>
