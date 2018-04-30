@@ -53,15 +53,15 @@
         </div>
         <!-- SECCION DE VENTAS POR PRODUCTO -->
         <div class="panel-body" id="panel-body">
-                <div class="panel-heading" ><a href="#productos" data-toggle="collapse" style="color:#2c3e50">Ventas por Productos</a></div class="panel-heading">
-                <div id="productos" class="panel-collapse collapse">
+                <div class="panel-heading" ><a href="#Vproductos" data-toggle="collapse" style="color:#2c3e50">Ventas por Productos</a></div class="panel-heading">
+                <div id="Vproductos" class="panel-collapse collapse">
                         <div class="panel-body" style="border: 0.5px solid #c6d0da;" >
                             {% if productos %}
                                 <label class="control-label">Seleccione producto a consultar</label>
                 
                                 <div class="form-group row">
                                   <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
-                                    <option>Seleccione Producto</option>
+                                    <option value = "0">Seleccione Producto</option>
                                     {% for producto in productos %}
                                     <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
                                     {% endfor %}
@@ -141,8 +141,8 @@
                     <div class="text-center">
                         <label class="control-label">Seleccione el cliente al que se le realizará la venta</label><br>                        
                     </div>              
-                    <select class="form-control text-center">
-                        <option>Seleccione Cliente</option>
+                    <select id="clientes" class="form-control text-center">
+                        <option value = "0">Seleccione Cliente</option>
                         {% for cliente in clientes %}
                         <option value="{{ cliente.id }}">{{cliente.identificacion}} -- {{cliente.nombre}} {{cliente.apellidos}}</option>
                         {% endfor %}
@@ -151,8 +151,8 @@
                     <div class="text-center">
                         <label class="control-label">Seleccione el producto a vender</label><br>                        
                     </div>              
-                    <select class="form-control text-center">
-                        <option>Seleccione Producto</option>
+                    <select id="productos" class="form-control text-center">
+                        <option value = "0">Seleccione Producto</option>
                         {% for producto in productos %}
                         <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
                         {% endfor %}
@@ -161,7 +161,7 @@
                     <div class="text-center">
                             <label class="control-label">Ingrese la cantidad de productos a Facturar</label><br>                        
                     </div>
-                    <input name="precio_unitario" required="" placeholder="Ingrese la cantidad de productos" class="form-control text-center" id="cantidad" type="number">              
+                    <input min="1" name="precio_unitario" required="" placeholder="Ingrese la cantidad de productos" class="form-control text-center" id="cantidad" type="number">              
                     <hr>
                     <div class="text-center">
                             <label class="control-label">Total</label><br>                        
@@ -197,11 +197,16 @@
                 {% endif %}
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" >Guardar</button>                
+              <button id="guardar" type="button" class="btn btn-success" >Guardar</button>                
               <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
         </div>
       </div>
 </div>
+{% endblock %}
+
+
+{% block extrajs %}
+    <script src="{% static 'js/ventas_main.js' %}" type="text/javascript"></script>
 {% endblock %}
