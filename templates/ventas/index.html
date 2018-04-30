@@ -18,9 +18,10 @@
             <i class='icon-beer icon-large'></i>
             Gestión de Ventas
             <div class='panel-tools'>
-                <button class="btn btn-warning">Nueva Venta</button>
+                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Nueva Venta</button>
             </div>
         </div>
+        <!-- SECCION DE VENTAS POR CLIENTES -->
         <div class="panel-body" id="panel-body">
                 <div class="panel-heading">
                     <a href="#usuarios" data-toggle="collapse" style="color:#2c3e50">Ventas por clientes</a>
@@ -50,24 +51,157 @@
                         </div>
                 </div>
         </div>
+        <!-- SECCION DE VENTAS POR PRODUCTO -->
         <div class="panel-body" id="panel-body">
                 <div class="panel-heading" ><a href="#productos" data-toggle="collapse" style="color:#2c3e50">Ventas por Productos</a></div class="panel-heading">
                 <div id="productos" class="panel-collapse collapse">
                         <div class="panel-body" style="border: 0.5px solid #c6d0da;" >
+                            {% if productos %}
                                 <label class="control-label">Seleccione producto a consultar</label>
                 
                                 <div class="form-group row">
                                   <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
                                     <option>Seleccione Producto</option>
-                                    
+                                    {% for producto in productos %}
+                                    <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
+                                    {% endfor %}
 
                                   </select>
                 
                                   <button class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS POR PRODUCTO</button>
                                 </div>
+                            {% else %}
+                            <label class="control-label">No hay productos registrados</label>
+
+                            <div class="form-group row">
+                              <a class="col-lg-3 col-md-3 btn btn-primary" href="{% url 'productos:nuevo' %}" style="height: 35px; margin-left: 10px"> REGISTRAR NUEVO PRODUCTO</a>
+                            </div>
+                            {% endif %}
                         </div>
                 </div>
         </div>
+        <!-- SECCION DE TODAS LAS VENTAS -->
+        <div class="panel-body" id="panel-body">
+
+                <div class="panel-heading">
+                    <a href="#todos" data-toggle="collapse" style="color:#2c3e50">Todas las Ventas</a>
+                </div>
+                <div id="todos" class="panel-collapse collapse">
+                        <div class="panel-body" style="border: 0.5px solid #c6d0da;">
+    
+                                <table>
+                                        {% if ventas %}
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td style="color: black">ID</td>
+                                                    <td style="color: black">Cliente</td>
+                                                    <td style="color: black; width: 20%;">Producto</td>
+                                                    <td style="color: black; width: 20%;">Cantidad</td>
+                                                    <td style="color: black; width: 20%;">Total de Venta</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for venta in ventas %}
+                            
+                                                <tr>
+                                                    <td>{{venta.id}}</td>
+                                                    <td>{{venta.cliente.nombre}} {{venta.cliente.apellidos}}</td>
+                                                    <td>{{venta.producto.nombre}}</td>
+                                                    <td>{{venta.total}}</td>
+                                                    <td>{{venta.total_ventas}}</td>
+                                                    
+                                                </tr>
+                            
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+                                        <h4>NO HAY VENTAS REGISTRADAS</h4>
+                                        {% endif %}
+                                </table>
+                                
+                        </div>
+                </div>
+                    
+        </div>
     </div>
+</div>
+<!-- MODAL PARA CREACION DE VENTAS -->
+<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header" style="color:antiquewhite;background-color: #1a242f">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center">REGISTRAR NUEVA VENTA</h4>
+            </div>
+            <div class="modal-body">
+                <!-- SI HAY CLIENTES Y PRODUCTOS REGISTRADOS -->
+                {% if clientes and productos %}
+                    <div class="text-center">
+                        <label class="control-label">Seleccione el cliente al que se le realizará la venta</label><br>                        
+                    </div>              
+                    <select class="form-control text-center">
+                        <option>Seleccione Cliente</option>
+                        {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}">{{cliente.identificacion}} -- {{cliente.nombre}} {{cliente.apellidos}}</option>
+                        {% endfor %}
+                    </select>
+                    <hr>
+                    <div class="text-center">
+                        <label class="control-label">Seleccione el producto a vender</label><br>                        
+                    </div>              
+                    <select class="form-control text-center">
+                        <option>Seleccione Producto</option>
+                        {% for producto in productos %}
+                        <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
+                        {% endfor %}
+                    </select>
+                    <hr>
+                    <div class="text-center">
+                            <label class="control-label">Ingrese la cantidad de productos a Facturar</label><br>                        
+                    </div>
+                    <input name="precio_unitario" required="" placeholder="Ingrese la cantidad de productos" class="form-control text-center" id="cantidad" type="number">              
+                    <hr>
+                    <div class="text-center">
+                            <label class="control-label">Total</label><br>                        
+                    </div>   
+                    <input class="form-control text-center" type="text" name="total_venta" id="total_venta" disabled>
+                    <!-- SI HAY PRODUCTOS PERO NO CLIENTES REGISTRADOS -->
+                {% elif not clientes and productos %}
+                <div class="text-center">
+                        <label class="control-label">No hay clientes registrados</label>
+                    <hr>
+                        <div class="form-group row">
+                          <a class="col-lg-3 col-md-3 btn btn-primary" href="{% url 'clientes:nuevo' %}" style="width: 50%; float:none; text-align:center;padding: 10px"> REGISTRAR NUEVO CLIENTE</a>
+                        </div>
+                </div>
+                <!-- SI HAY CLIENTES PERO NO PRODUCTOS REGISTRADOS -->
+                {% elif clientes and not productos %}
+                <div class="text-center">
+                        <label class="control-label">No hay productos registrados</label>
+                    <hr>
+                        <div class="form-group row">
+                          <a class="col-lg-3 col-md-3 btn btn-primary" href="{% url 'productos:nuevo' %}" style="width: 50%; float:none; text-align:center;padding: 10px"> REGISTRAR NUEVO PRODUCTO</a>
+                        </div>
+                </div>
+                <!-- SI NO HAY NI CLIENTES NI PRODUCTOS REGISTRADOS -->
+                {% elif not clientes and not productos %}
+                <div class="text-center">
+                        <label class="control-label">No hay información de clientes ni productos registrados</label>
+                    <hr>
+                        <div class="form-group row">
+                          <a class="col-lg-3 col-md-3 btn btn-primary" href="{% url 'index' %}" style="width: 50%; float:none; text-align:center;padding: 10px"> REGISTRAR INFORMACIÓN</a>
+                        </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" >Guardar</button>                
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 {% endblock %}

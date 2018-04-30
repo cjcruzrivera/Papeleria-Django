@@ -9,6 +9,8 @@ from app_productos.models import Producto
 
 def index(request):
     clientes = Cliente.objects.all()
+    productos = Producto.objects.all()
     return render(request, 'ventas/index.html',{
-        'clientes':clientes
+        'clientes':clientes,
+        'productos':productos,
     })
