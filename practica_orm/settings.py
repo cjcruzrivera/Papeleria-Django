@@ -25,7 +25,7 @@ SECRET_KEY = 're_3s4)+id+depw@c(ibf9mbmj4j73f#&b!0gg2u0*p&-88o_h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['desarrollo2univalle.pythonanywhere.com']
+ALLOWED_HOSTS = ['desarrollo2univalle.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition

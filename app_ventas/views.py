@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import JsonResponse, Http404
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 from app_clientes.models import Cliente
 from app_productos.models import Producto
@@ -24,6 +25,7 @@ def index(request):
         'ventas':ventas,
     })
 
+@csrf_exempt
 def nueva(request):
     cliente_id = request.POST.get('id_cliente')
     if not cliente_id:
@@ -36,6 +38,7 @@ def nueva(request):
     response = {'exito':'ok'}
     return JsonResponse(response)
 
+@csrf_exempt
 def reporte_clientes(request):
     cliente_id = request.POST.get('id_cliente')
     if not cliente_id:
@@ -57,7 +60,7 @@ def reporte_clientes(request):
     response = {'exito':'ok', 'ventas': ventas}
     return JsonResponse(response)
 
-
+@csrf_exempt
 def reporte_productos(request):
     producto_id = request.POST.get('id_producto')
     if not producto_id:
