@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $('#totales').DataTable();
+})
+
 $(document).on('click', '#guardar', function () {
     var cliente = $('#clientes').val();
     var producto = $('#productos').val();
@@ -50,7 +54,22 @@ $(document).on('keyup', '#cantidad', function () {
 
 $(document).on('blur', '#cantidad', function () {
     validateCantidad(); 
- });
+});
+
+// limitar el ingreso de letras en el total de objetos en una venta
+$(document).on('keypress', '#cantidad', function (e) {
+
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //backspace to delete always allows it
+    if (tecla == 8 ) {
+        return true;
+    }
+    // entry pattern, just accept numbers
+    patron = /[0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+});
 
 function validateCantidad() {
     var total = $('#cantidad').val();
@@ -109,18 +128,3 @@ function registrarVenta(cliente, producto, total) {
         },
     });
 }
-
-// limitar el ingreso de letras en el total de objetos en una venta
-$(document).on('keypress', '#cantidad', function (e) {
-
-    tecla = (document.all) ? e.keyCode : e.which;
-
-    //backspace to delete always allows it
-    if (tecla == 8 ) {
-        return true;
-    }
-    // entry pattern, just accept numbers
-    patron = /[0-9]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-});
