@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, CreateView
 from django.core.urlresolvers import reverse_lazy
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
+
+
 
 from .models import Producto
 from .forms import ProductoForm
@@ -33,6 +35,8 @@ class ProductoUpdateView(UpdateView):
 
 def eliminar(request):
     pk = request.POST.get('id_producto')
+    if not pk:
+        raise Http404
     producto_borrar = Producto.objects.get(pk=pk)
     producto_borrar.delete()
     response = {'exito':'ok'}

@@ -2,15 +2,35 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import JsonResponse, Http404
 
 from app_clientes.models import Cliente
 from app_productos.models import Producto
+from app_ventas.models import Venta
+
 # Create your views here.
 
 def index(request):
     clientes = Cliente.objects.all()
     productos = Producto.objects.all()
+    ventas = Venta.objects.all()
+    for venta in ventas:
+        venta.total_ventas=venta.total*venta.producto.precio_unitario
+        
     return render(request, 'ventas/index.html',{
         'clientes':clientes,
         'productos':productos,
+        'ventas':ventas,
     })
+
+def nueva(request):
+    cliente_id = request.POST.get('id_cliente')
+    if not cliente_id:
+        raise Http404
+    producto_id = request.POST.get('id_producto')
+    cliente = Cliente.objects.get(pk=cliente_id)
+    producto = Producto.objects.get(pk=producto_id)
+    venta = Venta(cliente=cliente, producto=producto,total=request.POST.get('total'))
+    venta.save()
+    response = {'exito':'ok'}
+    return JsonResponse(response)

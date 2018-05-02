@@ -109,7 +109,7 @@
                                                     <td>{{venta.cliente.nombre}} {{venta.cliente.apellidos}}</td>
                                                     <td>{{venta.producto.nombre}}</td>
                                                     <td>{{venta.total}}</td>
-                                                    <td>{{venta.total_ventas}}</td>
+                                                    <td>${{venta.total_ventas}} COP</td>
                                                     
                                                 </tr>
                             
@@ -154,7 +154,7 @@
                     <select id="productos" class="form-control text-center">
                         <option value = "0">Seleccione Producto</option>
                         {% for producto in productos %}
-                        <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
+                        <option value="{{ producto.id }}-{{producto.precio_unitario}}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
                         {% endfor %}
                     </select>
                     <hr>
