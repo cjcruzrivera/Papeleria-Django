@@ -2,6 +2,40 @@ $(document).ready(function () {
     $('#totales').DataTable();
 })
 
+$(document).on('click', '#ventas_cli', function () {
+    cliente = $('#clientes_reporte').val();
+    //alert(cliente);
+    if(cliente == '0'){
+        swal({
+            title: "Seleccione un cliente",
+            text: "Para consultar las ventas por cliente primero debe seleccionar uno.",
+            type: "warning",
+            icon: "warning",
+            confirmButtonColor: "#d51b23"
+        });
+        return;
+    }
+
+    consultar_ventas_cliente(cliente);
+})
+
+$(document).on('click', '#ventas_prod', function () {
+    producto = $('#productos_reporte').val();
+
+    if(producto == '0'){
+        swal({
+            title: "Seleccione un producto",
+            text: "Para consultar las ventas por producto primero debe seleccionar uno.",
+            type: "warning",
+            icon: "warning",
+            confirmButtonColor: "#d51b23"
+        });
+        return;
+    }
+
+    consultar_ventas_producto(producto);
+})
+
 $(document).on('click', '#guardar', function () {
     var cliente = $('#clientes').val();
     var producto = $('#productos').val();
@@ -70,6 +104,79 @@ $(document).on('keypress', '#cantidad', function (e) {
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
 });
+
+function consultar_ventas_cliente(cliente) {
+    $.ajax({
+        type: "POST",
+        data: {
+            id_cliente: cliente,
+        },
+        url: "/ventas/cliente/",
+        success: function (msg) {
+            pintar_tabla(msg.ventas,'clientes');
+        },
+        async: false,
+        dataType: "json",
+        cache: "false",
+        error: function (msg) {
+            swal({
+                title: "Error AJAX",
+                text: msg.responseText,
+                html: true,
+                type: "warning",
+                confirmButtonColor: "#d51b23"
+            });
+            console.log("AJAXerror");
+            console.log(msg);
+        },
+    });
+}
+
+function consultar_ventas_producto(producto) {
+    $.ajax({
+        type: "POST",
+        data: {
+            id_producto: producto,
+        },
+        url: "/ventas/producto/",
+        success: function (msg) {
+            pintar_tabla(msg.ventas,'productos');
+        },
+        async: false,
+        dataType: "json",
+        cache: "false",
+        error: function (msg) {
+            swal({
+                title: "Error AJAX",
+                text: msg.responseText,
+                html: true,
+                type: "warning",
+                confirmButtonColor: "#d51b23"
+            });
+            console.log("AJAXerror");
+            console.log(msg);
+        },
+    });
+}
+
+function pintar_tabla(ventas, reporte) {
+    var tabla = "";
+
+    tabla+= "<table id='tabla_"+reporte+"' class='table table-bordered table-hover'>";
+    tabla+= "<thead><tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Cantidad</th><th>Total Venta</th> </tr></thead><tbody>";
+    ventas.forEach(function (venta) {
+        tabla+="<tr>";
+        tabla+= "<td>"+venta.id+"</td>";    
+        tabla+= "<td>"+venta.cliente+"</td>";    
+        tabla+= "<td>"+venta.producto+"</td>";    
+        tabla+= "<td>"+venta.cantidad+"</td>";    
+        tabla+= "<td>"+venta.total+"</td>";    
+        tabla+="</tr>"
+    })
+    tabla+="<tbody></table>";
+    $('#div_tabla_'+reporte).html(tabla);
+    $('#tabla_'+reporte).DataTable();
+}
 
 function validateCantidad() {
     var total = $('#cantidad').val();

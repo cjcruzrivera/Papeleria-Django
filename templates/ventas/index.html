@@ -32,15 +32,16 @@
                                 <label class="control-label">Seleccione cliente a consultar</label>
 
                                 <div class="form-group row">
-                                  <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
-                                    <option>Seleccione Cliente</option>
+                                  <select id="clientes_reporte" class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
+                                    <option value="0">Seleccione Cliente</option>
                                     {% for cliente in clientes %}
                                     <option value="{{ cliente.id }}">{{cliente.identificacion}} -- {{cliente.nombre}} {{cliente.apellidos}}</option>
                                     {% endfor %}
                                   </select>
                 
-                                  <button class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS DEL CLIENTE</button>
+                                  <button id="ventas_cli" class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS DEL CLIENTE</button>
                                 </div>
+                                <div id="div_tabla_clientes"></div>
                                 {% else %}
                                 <label class="control-label">No hay clientes registrados</label>
 
@@ -60,7 +61,7 @@
                                 <label class="control-label">Seleccione producto a consultar</label>
                 
                                 <div class="form-group row">
-                                  <select class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
+                                  <select id="productos_reporte" class="col-lg-7 col-md-7" style="height: 35px; margin-left: 10px">
                                     <option value = "0">Seleccione Producto</option>
                                     {% for producto in productos %}
                                     <option value="{{ producto.id }}">{{producto.nombre}} --- ${{producto.precio_unitario}} COP x Unidad</option>
@@ -68,8 +69,10 @@
 
                                   </select>
                 
-                                  <button class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS POR PRODUCTO</button>
+                                  <button id="ventas_prod" class="col-lg-3 col-md-3 btn btn-primary" style="height: 35px; margin-left: 10px"> CONSULTAR VENTAS POR PRODUCTO</button>
                                 </div>
+                                <div id="div_tabla_productos"></div>
+                                
                             {% else %}
                             <label class="control-label">No hay productos registrados</label>
 
